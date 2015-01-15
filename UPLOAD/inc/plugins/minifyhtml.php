@@ -31,12 +31,12 @@ function minifyhtml_info()
 	$lang->load('config_minifyhtml');
 	return array
 	(
-		"name"			=>	$lang->minifyhtml,
-		"description"	=>	$lang->minifyhtml_desc,
+		"name"			=>	$db->escape_string($lang->minifyhtml),
+		"description"	=>	$db->escape_string($lang->minifyhtml_desc),
 		"website"		=>	"http://svepu.bplaced.net/minifyhtml-plugin-fuer-mybb/",
 		"author"		=>	"SvePu",
 		"authorsite"	=> 	"http://svepu.bplaced.net",
-		"version"		=>	"1.0",
+		"version"		=>	"1.1",
 		"guid"			=>	"",
 		"compatibility"	=>	"16*,18*"
 	);
@@ -50,8 +50,8 @@ function minifyhtml_activate()
 	$rows = $db->fetch_field($query_add, "rows");
     $minifyhtml_group = array(
 		"name" 			=>	"minifyhtml_settings",
-		"title" 		=>	$lang->minifyhtml_settings_title,
-		"description" 	=>	$lang->minifyhtml_settings_title_desc,
+		"title" 		=>	$db->escape_string($lang->minifyhtml_settings_title),
+		"description" 	=>	$db->escape_string($lang->minifyhtml_settings_title_desc),
 		"disporder"		=> 	$rows+1,
 		"isdefault" 	=>  0
 	);
@@ -61,8 +61,8 @@ function minifyhtml_activate()
 	$minifyhtml_1 = array(
         'sid'           => 'NULL',
         'name'			=> 'minifyhtml_enable',
-        'title'			=> $lang->minifyhtml_enable_title,
-        'description'  	=> $lang->minifyhtml_enable_title_desc,
+        'title'			=> $db->escape_string($lang->minifyhtml_enable_title),
+        'description'  	=> $db->escape_string($lang->minifyhtml_enable_title_desc),
         'optionscode'  	=> 'yesno',
         'value'        	=> '1',
         'disporder'		=> 1,
@@ -73,8 +73,8 @@ function minifyhtml_activate()
 	
     $minifyhtml_2 = array(
 		"name"			=> "minifyhtml_limit",
-		"title"			=> $lang->minifyhtml_limit_title,
-		"description" 	=> $lang->minifyhtml_limit_title_desc,
+		"title"			=> $db->escape_string($lang->minifyhtml_limit_title),
+		"description" 	=> $db->escape_string($lang->minifyhtml_limit_title_desc),
         'optionscode'  	=> 'text',
         'value'        	=> '700000',
 		"disporder"		=> "2",
@@ -86,11 +86,17 @@ function minifyhtml_activate()
 
 function minifyhtml_deactivate()
 {
-	global $db;	
-	$db->query("DELETE FROM ".TABLE_PREFIX."settinggroups WHERE name='minifyhtml_settings'");
-	$db->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name='minifyhtml_enable'");
-    $db->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name='minifyhtml_limit'");
-	rebuild_settings();
+	global $mybb, $db;	
+	
+	$result = $db->simple_select('settinggroups', 'gid', "name = 'minifyhtml_settings'", array('limit' => 1));
+	$group = $db->fetch_array($result);
+	
+	if(!empty($group['gid']))
+	{
+		$db->delete_query('settinggroups', "gid='{$group['gid']}'");
+		$db->delete_query('settings', "gid='{$group['gid']}'");
+		rebuild_settings();
+	}
 }
 
 function minifyhtml($page)
