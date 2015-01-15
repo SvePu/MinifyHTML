@@ -86,7 +86,7 @@ function minifyhtml_activate()
 
 function minifyhtml_deactivate()
 {
-	global $mybb, $db;	
+	global $mybb, $db;
 	
 	$result = $db->simple_select('settinggroups', 'gid', "name = 'minifyhtml_settings'", array('limit' => 1));
 	$group = $db->fetch_array($result);
