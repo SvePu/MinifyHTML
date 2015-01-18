@@ -36,6 +36,7 @@ function minifyhtml_info()
 		"website"		=>	"http://svepu.bplaced.net/minifyhtml-plugin-fuer-mybb/",
 		"author"		=>	"SvePu",
 		"authorsite"	=> 	"http://svepu.bplaced.net",
+		"codename"	=>	"minifyhtml",
 		"version"		=>	"1.1",
 		"guid"			=>	"",
 		"compatibility"	=>	"16*,18*"
