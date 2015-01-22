@@ -35,8 +35,13 @@ function minifyhtml_info()
 		"description"	=>	$db->escape_string($lang->minifyhtml_desc),
 		"website"		=>	"https://github.com/SvePu/MinifyHTML",
 		"author"		=>	"SvePu",
+<<<<<<< HEAD
 		"authorsite"	=> 	"https://github.com/SvePu",
 		"codename"		=>	"minifyhtml",
+=======
+		"authorsite"	=> 	"http://svepu.bplaced.net",
+		"codename"	=>	"minifyhtml",
+>>>>>>> 0d76cbbf3d31c2f463316e746e7b34cc49404463
 		"version"		=>	"1.2",
 		"guid"			=>	"",
 		"compatibility"	=>	"16*,18*"
