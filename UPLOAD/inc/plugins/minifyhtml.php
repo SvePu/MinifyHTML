@@ -37,7 +37,7 @@ function minifyhtml_info()
 		"author"		=>	"SvePu",
 		"authorsite"	=> 	"http://svepu.bplaced.net",
 		"codename"	=>	"minifyhtml",
-		"version"		=>	"1.1",
+		"version"		=>	"1.2",
 		"guid"			=>	"",
 		"compatibility"	=>	"16*,18*"
 	);
