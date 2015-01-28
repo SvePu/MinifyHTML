@@ -32,16 +32,14 @@ function minifyhtml_info()
 	$info = array
 	(
 		"name"			=>	$db->escape_string($lang->minifyhtml),
-		"description"	=>	$db->escape_string($lang->minifyhtml_desc),
+		"description"		=>	$db->escape_string($lang->minifyhtml_desc),
 		"website"		=>	"https://github.com/SvePu/MinifyHTML",
 		"author"		=>	"SvePu",
-		"authorsite"	=> 	"https://github.com/SvePu",
+		"authorsite"		=> 	"http://svepu.bplaced.net",
 		"codename"		=>	"minifyhtml",
-		"authorsite"	=> 	"http://svepu.bplaced.net",
-		"codename"	=>	"minifyhtml",
 		"version"		=>	"1.2",
 		"guid"			=>	"",
-		"compatibility"	=>	"16*,18*"
+		"compatibility"		=>	"16*,18*"
 	);
 	
 	$info_desc = '';
