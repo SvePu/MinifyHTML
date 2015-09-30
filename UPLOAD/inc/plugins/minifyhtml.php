@@ -1,8 +1,8 @@
 <?php
 
 /*
-MinifyHTML Plugin v 1.2 for MyBB
-Copyright (C) 2014 SvePu
+MinifyHTML Plugin v 1.3 for MyBB
+Copyright (C) 2015 SvePu
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,12 +32,12 @@ function minifyhtml_info()
 	$info = array
 	(
 		"name"			=>	$db->escape_string($lang->minifyhtml),
-		"description"		=>	$db->escape_string($lang->minifyhtml_desc),
+		"description"	=>	$db->escape_string($lang->minifyhtml_desc),
 		"website"		=>	"https://github.com/SvePu/MinifyHTML",
 		"author"		=>	"SvePu",
-		"authorsite"		=> 	"http://svepu.bplaced.net",
+		"authorsite"	=> 	"http://svepu.bplaced.net",
 		"codename"		=>	"minifyhtml",
-		"version"		=>	"1.2",
+		"version"		=>	"1.3",
 		"guid"			=>	"",
 		"compatibility"		=>	"16*,18*"
 	);
@@ -140,19 +140,23 @@ function minifyhtml($page)
 {
 	global $mybb;
 	if ($mybb->settings['minifyhtml_enable'] == 1){
-		if ($mybb->settings['minifyhtml_limit'] <= 0){
+		if ($mybb->settings['minifyhtml_limit'] <= 0)
+		{
 			$mybb->settings['minifyhtml_limit'] = 700000;
 		}
-		if ((strlen($page) > $mybb->settings['minifyhtml_limit']) || (strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false)){
+		if ((strlen($page) > $mybb->settings['minifyhtml_limit']) || (strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false))
+		{
 			return $page;
 		}
 		$ignore_tags = array('textarea','pre','script');
 		$ignore_regex = implode('|', $ignore_tags);
 		$cleaned_page = preg_replace(array('/(?:^\\s*<!--\\s*|\\s*(?:\\/\\/)?\\s*-->\\s*$)/','#(?ix)(?>[^\S ]\s*|\s{2,})(?=(?:(?:[^<]++|<(?!/?(?:' .$ignore_regex. ')\b))*+)(?:<(?>' .$ignore_regex. ')\b|\z))#'),array('',' '),$page);
-		if ( strlen($cleaned_page) <= 1 ) {
+		if ( strlen($cleaned_page) <= 1 ) 
+		{
 			return $page;
 		}
-		return $cleaned_page;
+		$valfix	= $mybb->settings['tplhtmlcomments'] == "1" ? " -->" : ""; //Validation Fix
+		return $cleaned_page.$valfix;
 	}
 }
 
