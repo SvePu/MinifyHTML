@@ -1,7 +1,7 @@
 <?php
 
 /*
-MinifyHTML Plugin v 1.3 for MyBB
+MinifyHTML Plugin v 1.4 for MyBB
 Copyright (C) 2015 SvePu
 
 This program is free software: you can redistribute it and/or modify
@@ -37,7 +37,7 @@ function minifyhtml_info()
 		"author"		=>	"SvePu",
 		"authorsite"	=> 	"http://svepu.bplaced.net",
 		"codename"		=>	"minifyhtml",
-		"version"		=>	"1.3",
+		"version"		=>	"1.4",
 		"guid"			=>	"",
 		"compatibility"		=>	"16*,18*"
 	);
@@ -144,7 +144,7 @@ function minifyhtml($page)
 		{
 			$mybb->settings['minifyhtml_limit'] = 700000;
 		}
-		if ((strlen($page) > $mybb->settings['minifyhtml_limit']) || (strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false))
+		if ((strlen($page) > $mybb->settings['minifyhtml_limit']) || (strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false) || (strpos($_SERVER['REQUEST_URI'], 'popup=true') !== false))
 		{
 			return $page;
 		}
