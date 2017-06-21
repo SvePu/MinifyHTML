@@ -139,19 +139,30 @@ function minifyhtml_deactivate()
 function minifyhtml($page)
 {
 	global $mybb;
-	if ($mybb->settings['minifyhtml_enable'] == 1){
+	if ($mybb->settings['minifyhtml_enable'] == 1)
+	{
 		if ($mybb->settings['minifyhtml_limit'] <= 0)
 		{
 			$mybb->settings['minifyhtml_limit'] = 700000;
 		}
-		if ((strlen($page) > $mybb->settings['minifyhtml_limit']) || (strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false) || (strpos($_SERVER['REQUEST_URI'], 'popup=true') !== false))
+
+		if (strlen($page) > $mybb->settings['minifyhtml_limit'] || strpos($_SERVER['REQUEST_URI'], 'popup=true') !== false)
 		{
 			return $page;
 		}
+
+		if(!empty($mybb->settings['minifyhtml_exclpage'])
+		{
+			if(strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false)
+			{
+				return $page;
+			}
+		}
+
 		$ignore_tags = array('textarea','pre','script');
 		$ignore_regex = implode('|', $ignore_tags);
 		$cleaned_page = preg_replace(array('/(?:^\\s*<!--\\s*|\\s*(?:\\/\\/)?\\s*-->\\s*$)/','#(?ix)(?>[^\S ]\s*|\s{2,})(?=(?:(?:[^<]++|<(?!/?(?:' .$ignore_regex. ')\b))*+)(?:<(?>' .$ignore_regex. ')\b|\z))#'),array('',' '),$page);
-		if ( strlen($cleaned_page) <= 1 ) 
+		if (strlen($cleaned_page) <= 1) 
 		{
 			return $page;
 		}
