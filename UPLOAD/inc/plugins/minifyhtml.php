@@ -37,7 +37,7 @@ function minifyhtml_info()
 		"author"		=>	"SvePu",
 		"authorsite"	=> 	"http://svepu.bplaced.net",
 		"codename"		=>	"minifyhtml",
-		"version"		=>	"1.4",
+		"version"		=>	"1.5",
 		"guid"			=>	"",
 		"compatibility"		=>	"16*,18*"
 	);
@@ -151,7 +151,7 @@ function minifyhtml($page)
 			return $page;
 		}
 
-		if(!empty($mybb->settings['minifyhtml_exclpage'])
+		if(!empty($mybb->settings['minifyhtml_exclpage']))
 		{
 			if(strpos($mybb->settings['minifyhtml_exclpage'], THIS_SCRIPT) !== false)
 			{
