@@ -35,7 +35,7 @@ function minifyhtml_info()
 		"description"	=>	$db->escape_string($lang->minifyhtml_desc),
 		"website"		=>	"https://github.com/SvePu/MinifyHTML",
 		"author"		=>	"SvePu",
-		"authorsite"	=> 	"http://svepu.bplaced.net",
+		"authorsite"	=> 	"https://github.com/SvePu",
 		"codename"		=>	"minifyhtml",
 		"version"		=>	"1.5",
 		"guid"			=>	"",
@@ -72,8 +72,8 @@ function minifyhtml_activate()
 {
     global $db, $lang;
 	$lang->load('config_minifyhtml');
-	$query_add = $db->simple_select("settinggroups", "COUNT(*) as rows");
-	$rows = $db->fetch_field($query_add, "rows");
+	$query_add = $db->simple_select("settinggroups", "COUNT(*) as count");
+	$rows = $db->fetch_field($query_add, "count");
     $minifyhtml_group = array(
 		"name" 			=>	"minifyhtml_settings",
 		"title" 		=>	$db->escape_string($lang->minifyhtml_settings_title),
