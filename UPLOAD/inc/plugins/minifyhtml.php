@@ -1,8 +1,8 @@
 <?php
 
 /*
-MinifyHTML Plugin v 1.4 for MyBB
-Copyright (C) 2015 SvePu
+MinifyHTML Plugin v 1.6 for MyBB
+Copyright (C) 2015 - 2020 SvePu
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
